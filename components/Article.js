@@ -86,6 +86,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'will',
+    date: 'Jan 2st, 2014',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. hello Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodorgi hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor sdfgsgsafd. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -93,6 +109,7 @@ const data = [
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
+
 
   <div class="article">
     <h2>{title of the article}</h2>
@@ -114,3 +131,53 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+function articleMaker(articleObj){
+
+  const articlediv = document.createElement("div");
+  const articleh2 = document.createElement("h2");
+  const articlep1 = document.createElement("p");
+  const articlep2 = document.createElement("p");
+  const articlep3 = document.createElement("p");
+  const articlep4 = document.createElement("p");
+  const articlespan = document.createElement("span");
+
+  articlediv.classList.add("article");
+  articlep1.classList.add("date");
+  articlespan.classList.add("expandButton");
+
+  articleh2.textContent = articleObj.title;
+  articlep1.textContent = articleObj.date;
+  articlep2.textContent = articleObj.firstParagraph;
+  articlep3.textContent = articleObj.secondParagraph;
+  articlep4.textContent = articleObj.thirdParagraph;
+  articlespan.textContent = "+"
+
+  articlediv.appendChild(articleh2)
+  articlediv.appendChild(articlep1)
+  articlediv.appendChild(articlep2)
+  articlediv.appendChild(articlep3)
+  articlediv.appendChild(articlep4)
+  articlediv.appendChild(articlespan)
+
+  articlespan.addEventListener("click", (event) => {
+   articlediv.classList.toggle("article-open")
+  });
+
+  return articlediv;
+
+}
+
+const divArticle = document.querySelector(".articles")
+
+
+
+const articleMap = data.map((dataItem) => {
+  return articleMaker(dataItem);
+});
+
+  articleMap.forEach((item) => {
+  divArticle.appendChild(item);
+})
+
